@@ -7,7 +7,6 @@ public abstract class Product {
     public static final String DEFAULT_BAG_COLOR = "None";
     public static final String DEFAULT_TONAL_COLOR = "None";
 
-
     // INSTANCE VARIABLES
     private String sku;
     private int year;
@@ -18,7 +17,6 @@ public abstract class Product {
     private String color4;
     private String productColor;
     private String tonalColor;
-
 
 /****************************************************/
 
@@ -37,15 +35,15 @@ public abstract class Product {
 
     //FULL CONSTRUCTOR
     public Product(
-        String sku, int year, String modelDescription, 
-        String color1, String color2, String color3, String color4, 
-        String productColor, String tonalColor
-        ) throws InvalidSkuException, InvalidYearException, InvalidThreadCodeException{
-       this.setAll(sku, year, modelDescription, color1, color2, color3, color4, productColor, tonalColor);
+            String sku, int year, String modelDescription,
+            String color1, String color2, String color3, String color4,
+            String productColor, String tonalColor)
+            throws InvalidSkuException, InvalidYearException, InvalidThreadCodeException {
+        this.setAll(sku, year, modelDescription, color1, color2, color3, color4, productColor, tonalColor);
     }
-    
+
     //COPY CONSTRUCTOR
-    public Product(Product other) throws InvalidSkuException, InvalidYearException, InvalidThreadCodeException{
+    public Product(Product other) {
         this.sku = other.sku;
         this.year = other.year;
         this.modelDescription = other.modelDescription;
@@ -61,7 +59,8 @@ public abstract class Product {
     //EXCEPTION HANDLING METHODS
     public void validateThreadCode(String threadCode) throws InvalidThreadCodeException {
         if (threadCode.length() < 4 || threadCode.length() > 5) {
-            throw new InvalidThreadCodeException("INVALID THREAD CODE: " + threadCode + ". Valid thread codes are 4 or 5 characters long");
+            throw new InvalidThreadCodeException(
+                    "INVALID THREAD CODE: " + threadCode + ". Valid thread codes are 4 or 5 characters long");
         }
     }
 
@@ -70,22 +69,22 @@ public abstract class Product {
             throw new InvalidYearException("INVALID YEAR ENTERED: " + year);
         }
     }
-    
+
     public void validateSku(String sku) throws InvalidSkuException {
         if (sku.length() != 6) {
-            throw new InvalidSkuException("INVALID SKU ENTERED: "+ sku + ". Valid SKU's are 6 character/numbers long");
+            throw new InvalidSkuException("INVALID SKU ENTERED: " + sku + ". Valid SKU's are 6 character/numbers long");
         }
     }
 
 /****************************************************/
     //SETTERS
     public void setSku(String sku) throws InvalidSkuException {
-        validateSku(sku);  // Validate before setting
+        validateSku(sku); // Validate before setting
         this.sku = sku;
     }
 
     public void setYear(int year) throws InvalidYearException {
-        validateYear(year);  // Validate before setting
+        validateYear(year); // Validate before setting
         this.year = year;
     }
 
@@ -125,71 +124,87 @@ public abstract class Product {
     }
 
 /****************************************************/
-     //GETTERS
+    //GETTERS
     public String getSku() {
         return sku;
     }
-    
+
     public int getYear() {
         return year;
     }
-    
+
     public String getModelDescription() {
         return modelDescription;
     }
-    
+
     public String getColor1() {
         return color1;
     }
-    
+
     public String getColor2() {
         return color2;
     }
-    
+
     public String getColor3() {
         return color3;
     }
-    
+
     public String getColor4() {
         return color4;
     }
-    
+
     public String getProductColor() {
         return productColor;
     }
-    
+
     public String getTonalColor() {
         return tonalColor;
     }
 
 /****************************************************/
     //SETALL
-    
+
     public void setAll(
             String sku, int year, String modelDescription,
             String color1, String color2, String color3, String color4,
-            String productColor, String tonalColor
-            ) throws InvalidSkuException, InvalidYearException, InvalidThreadCodeException{
-                validateSku(sku);
-                validateYear(year);
-                validateThreadCode(color1);
-                validateThreadCode(color2);
-                validateThreadCode(color3);
-                validateThreadCode(color4);
-                validateThreadCode(productColor);
-                validateThreadCode(tonalColor);
-                this.sku = sku;
-                this.year = year;
-                this.modelDescription = modelDescription;
-                this.color1 = color1;
-                this.color2 = color2;
-                this.color3 = color3;
-                this.color4 = color4;
-                this.productColor = productColor;
-                this.tonalColor = tonalColor;
-                
+            String productColor, String tonalColor)
+            throws InvalidSkuException, InvalidYearException, InvalidThreadCodeException {
+        validateSku(sku);
+        validateYear(year);
+        validateThreadCode(color1);
+        validateThreadCode(color2);
+        validateThreadCode(color3);
+        validateThreadCode(color4);
+        validateThreadCode(productColor);
+        validateThreadCode(tonalColor);
+        this.sku = sku;
+        this.year = year;
+        this.modelDescription = modelDescription;
+        this.color1 = color1;
+        this.color2 = color2;
+        this.color3 = color3;
+        this.color4 = color4;
+        this.productColor = productColor;
+        this.tonalColor = tonalColor;
 
+    }
 
-            }
-
+/****************************************************/
+    //TO STRING
+    @Override
+    public String toString() {
+        return "Product{" +
+                "sku='" + sku + '\'' +
+                ", year=" + year +
+                ", modelDescription='" + modelDescription + '\'' +
+                ", color1='" + color1 + '\'' +
+                ", color2='" + color2 + '\'' +
+                ", color3='" + color3 + '\'' +
+                ", color4='" + color4 + '\'' +
+                ", productColor='" + productColor + '\'' +
+                ", tonalColor='" + tonalColor + '\'' +
+                '}';
+    }
+        
 }
+
